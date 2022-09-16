@@ -1,0 +1,35 @@
+.card-align{
+    margin-top: 5%;
+}
+
+.add-brand {
+    text-align: center;
+}
+
+.text-color {
+    color: #f15a15;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+#btn-style{
+ font-weight:400;
+}
+
+#align{
+    margin-bottom: -5%;
+}
+
+.modal-color{
+    background-color: #00bda5;
+}
+
+.btn-color{
+    background-color: #f15a15;
+    color: white;
+}
+
+.btn-border{
+    border: 1px solid #f15a15;
+    color: #f15a15;
+}

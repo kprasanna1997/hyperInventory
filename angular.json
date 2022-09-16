@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "hyperinventory"
+    }
+  },
+  "defaultProject": "hyperinventory",
+  "cli": {
+    "analytics": "a69f8e89-b771-4834-9685-ef810fac1ee3"
+  }
 }
