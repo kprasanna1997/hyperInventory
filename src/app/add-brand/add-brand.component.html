@@ -1,0 +1,48 @@
+<div class="card card-align" style="width: 18rem;">
+    <div class="card-body add-brand" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
+        <p class="text-color" id="align">+</p>
+        <p class="text-color" id="btn-style">Add Brand</p>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-color">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="brandForm">
+                    <div class="form-group">
+                        <label for="brandName">Brand Name</label>
+                        <input type="text" class="form-control" formControlName="brandName">
+                        <span style="color: red; font-size: smaller;"
+                            *ngIf=" brandName.invalid && brandName.touched && brandName?.errors['required']">Brand
+                            name cannot be empty.</span>
+                        <span style="color: red; font-size: smaller;"
+                            *ngIf=" brandName.invalid && brandName.touched && brandName?.errors['pattern']">Enter
+                            a correct Brand name.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Brand Logo</label>
+                        <input type="file" class="form-control-file file-style" id="exampleFormControlFile1"
+                            formControlName="brandLogo">
+                        <span style="color: red; font-size: smaller;"
+                            *ngIf=" brandLogo.invalid && brandLogo.touched && brandLogo?.errors['required']">Brand
+                            logo cannot be empty.</span>
+                        <span style="color: red; font-size: smaller;"
+                            *ngIf=" brandLogo.invalid && brandLogo.touched && brandLogo?.errors['pattern']">Select
+                            brand logo image.</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" (click)="addBrand()" class="btn  btn-color" [disabled]="brandForm.invalid">Submit</button>
+                <button type="button" id="close" class="btn btn-border" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './Shared/header/header.component';
 import { AddBrandComponent } from './add-brand/add-brand.component';
-import { BrandAddFormComponent } from './brand-add-form/brand-add-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
@@ -15,7 +14,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     HeaderComponent,
     AddBrandComponent,
-    BrandAddFormComponent
   ],
   imports: [
     BrowserModule,
