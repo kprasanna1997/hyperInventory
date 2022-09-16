@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Brand } from '../interface/brand';
 
 @Injectable({
@@ -13,10 +14,10 @@ export class HttpService {
 
   addBrand(brand: Brand) {
     console.log(brand);
-    return this.http.post(`${brand}/v1/companies/${this.companyId}/brands`, brand)
+    return this.http.post(`${this.url}/v1/companies/${this.companyId}/brands`, brand)
   }
 
-  getBrandDetails() {
-    return this.http.get(``)
+  getBrandDetails():Observable<Brand[]> {
+    return this.http.get<Brand[]>(`${this.url}/v1/companies/${this.companyId}/brands`)
   }
 }
