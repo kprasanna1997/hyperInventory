@@ -1,4 +1,4 @@
 export interface Brand{
-    brandName:string;
-    brandLogo:string;
+    name:string;
+    logo:string;
 }

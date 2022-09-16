@@ -4,6 +4,8 @@
         <p class="text-color" id="btn-style">Add Brand</p>
     </div>
 </div>
+<app-display-brands></app-display-brands>
+
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -18,29 +20,30 @@
                 <form [formGroup]="brandForm">
                     <div class="form-group">
                         <label for="brandName">Brand Name</label>
-                        <input type="text" class="form-control" formControlName="brandName">
+                        <input type="text" class="form-control" formControlName="name">
                         <span style="color: red; font-size: smaller;"
-                            *ngIf=" brandName.invalid && brandName.touched && brandName?.errors['required']">Brand
+                            *ngIf=" name.invalid && name.touched && name?.errors['required']">Brand
                             name cannot be empty.</span>
                         <span style="color: red; font-size: smaller;"
-                            *ngIf=" brandName.invalid && brandName.touched && brandName?.errors['pattern']">Enter
+                            *ngIf=" name.invalid && name.touched && name?.errors['pattern']">Enter
                             a correct Brand name.</span>
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Brand Logo</label>
                         <input type="file" class="form-control-file file-style" id="exampleFormControlFile1"
-                            formControlName="brandLogo">
+                            formControlName="logo">
                         <span style="color: red; font-size: smaller;"
-                            *ngIf=" brandLogo.invalid && brandLogo.touched && brandLogo?.errors['required']">Brand
+                            *ngIf=" logo.invalid && logo.touched && logo?.errors['required']">Brand
                             logo cannot be empty.</span>
                         <span style="color: red; font-size: smaller;"
-                            *ngIf=" brandLogo.invalid && brandLogo.touched && brandLogo?.errors['pattern']">Select
+                            *ngIf=" logo.invalid && logo.touched && logo?.errors['pattern']">Select
                             brand logo image.</span>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="submit" (click)="addBrand()" class="btn  btn-color" [disabled]="brandForm.invalid">Submit</button>
+                <button type="submit" (click)="addBrand()" class="btn  btn-color"
+                    [disabled]="brandForm.invalid">Submit</button>
                 <button type="button" id="close" class="btn btn-border" data-dismiss="modal">Cancel</button>
             </div>
         </div>

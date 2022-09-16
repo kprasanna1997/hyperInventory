@@ -1,6 +1,10 @@
-<div class="card card-align" *ngIf="brandLists.length">
-    <div class="card-body" *ngFor="let brand of brandLists">
-     <img [src]="brand.brandLogo" alt="brand.brandLogo">
-     <h4>{{brand.brandName}}</h4>
+<div *ngIf="brandLists.length">
+    <div class="card w-50" *ngFor="let brand of brandLists">
+        <div class="card-body">
+            <img [src]="brand.logo" height="100px" alt="brand.logo">
+            <h4>{{brand.name}}</h4>
+            <button class="btn btn-secondary">Edit</button>
+            <button class="btn btn-danger ml-5">Delete</button>
+        </div>
     </div>
 </div>

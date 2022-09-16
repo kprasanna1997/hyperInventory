@@ -15,17 +15,17 @@ export class AddBrandComponent implements OnInit {
 
   ngOnInit(): void {
     this.brandForm=this.formBuilder.group({
-      brandName:["",[Validators.required,Validators.pattern("[a-zA-Z ]+$")]],
-      brandLogo:["",[Validators.required,Validators.pattern("[^\\s]+(.*?)\\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$")]]
+      name:["",[Validators.required,Validators.pattern("[a-zA-Z ]+$")]],
+      logo:["",[Validators.required,Validators.pattern("[^\\s]+(.*?)\\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$")]]
     })
   }
 
-  get brandName(){
-    return this.brandForm.get("brandName")
+  get name(){
+    return this.brandForm.get("name")
   }
 
-  get brandLogo(){
-    return this.brandForm.get("brandLogo")
+  get logo(){
+    return this.brandForm.get("logo")
   }
 
   addBrand(){   
