@@ -7,6 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './Shared/header/header.component';
 import { AddBrandComponent } from './add-brand/add-brand.component';
 import { BrandAddFormComponent } from './brand-add-form/brand-add-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { BrandAddFormComponent } from './brand-add-form/brand-add-form.component
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
