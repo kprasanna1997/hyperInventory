@@ -1,0 +1,6 @@
+.card-align-flex{
+  display: flex;
+  flex-direction: row;
+  margin-top: 2%;
+  width: 35%;
+}

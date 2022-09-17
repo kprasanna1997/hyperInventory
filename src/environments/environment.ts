@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: "https://devapi.hyperinvento.com",
+  companyId: "d2ea8d62-786f-410e-acf5-7c2d72b17deb"
 };
 
 /*

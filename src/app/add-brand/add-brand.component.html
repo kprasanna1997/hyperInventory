@@ -1,0 +1,51 @@
+<div class="card card-align" style="width: 18rem;">
+    <div class="card-body add-brand" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
+        <p class="text-color" id="align">+</p>
+        <p class="text-color" id="btn-style">Add Brand</p>
+    </div>
+</div>
+<app-display-brands></app-display-brands>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-color">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="brandForm">
+                    <div class="form-group">
+                        <label for="brandName">Brand Name</label>
+                        <input type="text" class="form-control" formControlName="name">
+                        <span style="color: red; font-size: smaller;"
+                            *ngIf=" name.invalid && name.touched && name?.errors['required']">Brand
+                            name cannot be empty.</span>
+                        <span style="color: red; font-size: smaller;"
+                            *ngIf=" name.invalid && name.touched && name?.errors['pattern']">Enter
+                            a correct Brand name.</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Brand Logo</label>
+                        <input type="text" class="form-control" formControlName="logo"
+                            value="https://static.toiimg.com/thumb/msid-60175275,width-400,resizemode-4/60175275.jpg">
+                        <span style="color: red; font-size: smaller;"
+                            *ngIf=" logo.invalid && logo.touched && logo?.errors['required']">Brand
+                            logo cannot be empty.</span>
+                        <span style="color: red; font-size: smaller;"
+                            *ngIf=" logo.invalid && logo.touched && logo?.errors['pattern']">Select
+                            brand logo image.</span>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button *ngIf="!isEdit" type="submit" (click)="addBrand()" class="btn  btn-color"
+                  #btn  [disabled]="brandForm.invalid">Submit</button>
+                <button *ngIf="isEdit" type="submit" (click)="addBrand()" class="btn  btn-color"
+                  #btn [disabled]="brandForm.invalid">Update</button>
+                <button type="button" class="btn btn-border" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
