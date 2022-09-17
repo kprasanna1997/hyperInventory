@@ -5,9 +5,10 @@ import { DisplayBrandsComponent } from './display-brands/display-brands.componen
 
 
 const routes: Routes = [
-  { path: "", component: AddBrandComponent },
-  { path: "display-brands", component: DisplayBrandsComponent },
-  { path: "edit-brand/:id", component: AddBrandComponent }
+  { path: "", redirectTo: "add", pathMatch: "full" },
+  { path: "add", component: AddBrandComponent },
+  { path: "display", component: DisplayBrandsComponent },
+  { path: "edit/:id", component: AddBrandComponent }
 ];
 
 @NgModule({

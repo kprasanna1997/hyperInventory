@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl:"https://devapi.hyperinvento.com"
+  apiUrl: "https://devapi.hyperinvento.com",
+  companyId: "d2ea8d62-786f-410e-acf5-7c2d72b17deb"
 };
 
 /*

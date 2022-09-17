@@ -1,10 +1,10 @@
-<div *ngIf="brandLists.length">
-    <div class="card w-50" *ngFor="let brand of brandLists">
+<div *ngIf="brands.length">
+    <div class="card w-50 mt-2" *ngFor="let brand of brands; let i=index">
         <div class="card-body">
             <img [src]="brand.logo" height="100px" alt="brand.logo">
             <h4>{{brand.name}}</h4>
-            <button class="btn btn-secondary">Edit</button>
-            <button class="btn btn-danger ml-5">Delete</button>
+            <button class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" [routerLink]="['/edit/'+i]">Edit</button>
+            <button class="btn btn-danger ml-5" (click)="deleteBrand(brand)">Delete</button>
         </div>
     </div>
 </div>

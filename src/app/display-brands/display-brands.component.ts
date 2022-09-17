@@ -9,16 +9,24 @@ import { HttpService } from '../Services/http.service';
 })
 export class DisplayBrandsComponent implements OnInit {
 
-  brandLists: Brand[] = [];
+  brands: Brand[] = [];
   errorMessage: string = "";
 
   constructor(private httpService: HttpService) { }
 
   ngOnInit(): void {
-    this.httpService.getBrandDetails().subscribe((brandLists) => {
-      this.brandLists = brandLists.results;
-      console.log(this.brandLists);
+    this.getBrands()
+  }
+
+  getBrands() {
+    this.httpService.getBrands().subscribe((brandLists) => {
+      this.brands = brandLists.results;
+      console.log(this.brands);
     })
   }
 
+  deleteBrand(brand: Brand) {
+    this.httpService.deleteBrand(brand).subscribe()
+    this.getBrands()
+  }
 }

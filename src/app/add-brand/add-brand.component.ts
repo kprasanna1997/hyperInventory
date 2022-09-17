@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Brand } from '../interface/brand';
 import { HttpService } from '../Services/http.service';
 
 @Component({
@@ -7,33 +10,83 @@ import { HttpService } from '../Services/http.service';
   templateUrl: './add-brand.component.html',
   styleUrls: ['./add-brand.component.css']
 })
-export class AddBrandComponent implements OnInit {
- 
-  brandForm:FormGroup
+export class AddBrandComponent implements OnInit, OnDestroy {
 
-  constructor(private formBuilder:FormBuilder , private httpService:HttpService) { }
+  isEdit: boolean = false;
+  brandId: number;
+  brandForm: FormGroup;
+  brands: Brand[] = [];
+  paramSubscription: Subscription
+
+  // @ViewChild("btn") modal:ElementRef
+
+  constructor(private formBuilder: FormBuilder,
+    private httpService: HttpService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.brandForm=this.formBuilder.group({
-      name:["",[Validators.required,Validators.pattern("[a-zA-Z ]+$")]],
-      logo:["",[Validators.required,Validators.pattern("[^\\s]+(.*?)\\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF)$")]]
+
+    this.brandForm = this.formBuilder.group({
+      id: [""],
+      name: ["", [Validators.required, Validators.pattern("[a-zA-Z ]+$")]],
+      logo: ["", [Validators.required, Validators.pattern("[^\\s]+(.*?)\\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF|svg)$")]]
+    })
+
+    this.paramSubscription = this.route.params.subscribe((params: Params) => {
+      if (params["id"] <= this.brands.length) {
+        this.isEdit = true
+        this.brandId = params["id"]
+        console.log(this.brandId);
+        this.getBrands()
+      }
     })
   }
 
-  get name(){
+  get id() {
+    return this.brandForm.get("id")
+  }
+
+  get name() {
     return this.brandForm.get("name")
   }
 
-  get logo(){
+  get logo() {
     return this.brandForm.get("logo")
   }
 
-  addBrand(){   
-   this.httpService.addBrand(this.brandForm.value);
-   this.brandForm.reset()
-   let closeButton=document.getElementById("close")
-   closeButton.click()
+  patchBrandForm(brand: Brand[], brandId: number) {
+    if (brandId !== undefined) {
+      const { id, name, logo } = brand[brandId]
+      this.brandForm.patchValue({
+        id: id,
+        name: name,
+        logo: logo
+      })
+    }
   }
-  
 
+  getBrands() {
+    this.httpService.getBrands().subscribe((brands) => {
+      this.brands = brands.results
+      this.patchBrandForm(this.brands, this.brandId)
+    })
+  }
+
+  addBrand() {
+    if (!this.isEdit) {
+      this.httpService.addBrand(this.brandForm.value).subscribe();
+      this.brandForm.reset()
+      // this.modal.nativeElement.click()
+    } else {
+      this.httpService.editBrand(this.brandForm.value).subscribe();
+      this.brandForm.reset()
+      this.isEdit = false
+      // this.modal.nativeElement.click()
+    }
+
+  }
+
+  ngOnDestroy(): void {
+    this.paramSubscription.unsubscribe()
+  }
 }
