@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Brand } from '../interface/brand';
 import { HttpService } from '../Services/http.service';
@@ -22,7 +22,8 @@ export class AddBrandComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder,
     private httpService: HttpService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router:Router) { }
 
   ngOnInit(): void {
 
@@ -74,6 +75,7 @@ export class AddBrandComponent implements OnInit, OnDestroy {
 
   addBrand() {
     if (!this.isEdit) {
+      this.brandForm.value.logo="https://static.toiimg.com/thumb/msid-60175275,width-400,resizemode-4/60175275.jpg";
       this.httpService.addBrand(this.brandForm.value).subscribe();
       this.brandForm.reset()
       // this.modal.nativeElement.click()
@@ -83,7 +85,6 @@ export class AddBrandComponent implements OnInit, OnDestroy {
       this.isEdit = false
       // this.modal.nativeElement.click()
     }
-
   }
 
   ngOnDestroy(): void {
