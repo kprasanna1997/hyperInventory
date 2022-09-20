@@ -4,13 +4,12 @@
         <p class="text-color" id="btn-style">Add Brand</p>
     </div>
 </div>
-<app-display-brands></app-display-brands>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header modal-color">
                 <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button #close type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -28,8 +27,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Brand Logo</label>
-                        <input type="text" class="form-control" formControlName="logo"
-                            value="https://static.toiimg.com/thumb/msid-60175275,width-400,resizemode-4/60175275.jpg">
+                        <input type="text" class="form-control" formControlName="logo">
                         <span style="color: red; font-size: smaller;"
                             *ngIf=" logo.invalid && logo.touched && logo?.errors['required']">Brand
                             logo cannot be empty.</span>
@@ -41,11 +39,12 @@
             </div>
             <div class="modal-footer">
                 <button *ngIf="!isEdit" type="submit" (click)="addBrand()" class="btn  btn-color"
-                  #btn  [disabled]="brandForm.invalid">Submit</button>
-                <button *ngIf="isEdit" type="submit" (click)="addBrand()" class="btn  btn-color"
-                  #btn [disabled]="brandForm.invalid">Update</button>
+                    [disabled]="brandForm.invalid">Submit</button>
+                <button *ngIf="isEdit" type="submit" (click)="updateBrand()" class="btn  btn-color"
+                    [disabled]="brandForm.invalid">Update</button>
                 <button type="button" class="btn btn-border" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
 </div>
+<app-display-brands [brands]="brands" (brandsAfterDeletion)="brandsAfterDeletion()"></app-display-brands>
