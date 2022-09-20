@@ -106,23 +106,20 @@ export class AddBrandComponent implements OnInit, OnDestroy {
           this.brandForm.reset()
           this.modal.nativeElement.click()
           this.isEdit = false
-          this.getBrands()
+          this.router.navigate(["add"])
         }
       }, error => {
         if (error) {
           this.toastr.error(error.error.title, 'Unsuccessful')
         }
       });
-      // this.router.navigate(["add"])
     }
   }
 
 
   getBrands() {
     this.httpService.getBrands().subscribe((brands) => {
-
       if (brands) {
-        this.toastr.success('Sucessfully fetched!', 'Successful');
         this.brands = brands.results;
         console.log(this.brands);
       }
@@ -135,6 +132,7 @@ export class AddBrandComponent implements OnInit, OnDestroy {
 
   brandsAfterDeletion() {
     this.getBrands()
+    this.router.navigate(["add"])
   }
 
   ngOnDestroy(): void {
