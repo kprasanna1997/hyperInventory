@@ -12,9 +12,7 @@ import { DisplayBrandsComponent } from './display-brands/display-brands.componen
 import { AuthInterceptor } from './Interceptor/auth.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
-
+import { SpinnerComponent } from './Shared/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -22,10 +20,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     AddBrandComponent,
     DisplayBrandsComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      preventDuplicates: true,
+    }),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
