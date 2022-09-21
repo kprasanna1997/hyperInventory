@@ -1,3 +1,7 @@
+<div *ngIf="isLoading">
+    <app-spinner></app-spinner>
+</div>
+
 <div class="card card-align" style="width: 18rem;">
     <div class="card-body add-brand" style="cursor: pointer;" data-toggle="modal" data-target="#exampleModal">
         <p class="text-color" id="align">+</p>
@@ -47,4 +51,7 @@
         </div>
     </div>
 </div>
-<app-display-brands [brands]="brands" (brandsAfterDeletion)="brandsAfterDeletion()"></app-display-brands>
+
+<div *ngIf="!isLoading">
+    <app-display-brands [brands]="brands" (brandsAfterDeletion)="brandsAfterDeletion()"></app-display-brands>
+</div>

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -14,6 +14,7 @@ import { HttpService } from '../Services/http.service';
 })
 export class AddBrandComponent implements OnInit, OnDestroy {
 
+  isLoading: boolean = false;
   isEdit: boolean = false;
   brandId: number;
   brandForm: FormGroup;
@@ -31,8 +32,6 @@ export class AddBrandComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getBrands()
-    console.log(this.isEdit);
-
     this.brandForm = this.formBuilder.group({
       id: [""],
       name: ["", [Validators.required, Validators.pattern("[a-zA-Z ]+$")]],
@@ -78,20 +77,23 @@ export class AddBrandComponent implements OnInit, OnDestroy {
       this.patchBrandForm(this.brands, this.brandId)
     })
   }
+
   addBrand() {
     if (!this.isEdit) {
+      this.isLoading = true;
       this.brandForm.value.logo = "https://static.toiimg.com/thumb/msid-60175275,width-400,resizemode-4/60175275.jpg";
-
       this.httpService.addBrand(this.brandForm.value).subscribe((response) => {
         if (response) {
           this.toastr.success('Sucessfully Added!', 'Successful');
           this.brandForm.reset()
           this.modal.nativeElement.click()
           this.getBrands()
+          this.isLoading = false;
         }
       }, error => {
         if (error) {
           this.toastr.error(error.error.title, 'Unsuccessful')
+          this.isLoading = false;
         }
       })
     }
@@ -99,6 +101,7 @@ export class AddBrandComponent implements OnInit, OnDestroy {
 
   updateBrand() {
     if (this.isEdit) {
+      this.isLoading = true;
       this.httpService.editBrand(this.brandForm.value).subscribe((response) => {
         if (response) {
           console.log(response)
@@ -106,10 +109,12 @@ export class AddBrandComponent implements OnInit, OnDestroy {
           this.brandForm.reset()
           this.modal.nativeElement.click()
           this.isEdit = false
+          this.isLoading = false;
           this.router.navigate(["add"])
         }
       }, error => {
         if (error) {
+          this.isLoading = false;
           this.toastr.error(error.error.title, 'Unsuccessful')
         }
       });
@@ -120,7 +125,9 @@ export class AddBrandComponent implements OnInit, OnDestroy {
   getBrands() {
     this.httpService.getBrands().subscribe((brands) => {
       if (brands) {
-        this.brands = brands.results;
+        this.brands = brands.results.map((brands: Brand[]) => {
+          return brands
+        });
         console.log(this.brands);
       }
     }, error => {

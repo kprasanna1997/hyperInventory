@@ -26,7 +26,6 @@ import { SpinnerComponent } from './Shared/spinner/spinner.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 2000,
-      preventDuplicates: true,
     }),
     BrowserModule,
     AppRoutingModule,
